@@ -91,13 +91,20 @@
             <scope>runtime</scope>
         </dependency>
 
-
         <!-- библиотека - пул соединений для подключения к серверу БД -->
         <dependency>
             <groupId>com.mchange</groupId>
             <artifactId>c3p0</artifactId>
             <version>0.9.5.5</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.32</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -163,8 +170,5 @@
                 </configuration>
             </plugin> -->
         </plugins>
-
     </build>
-
-
 </project>
