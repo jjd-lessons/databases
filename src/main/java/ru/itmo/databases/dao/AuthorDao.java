@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AuthorDao {
-    public boolean createTable(){
+    public boolean createTable() {
         String createSql = "CREATE TABLE IF NOT EXISTS tb_authors (" +
                 "id SERIAL PRIMARY KEY, " +
                 "unique_name VARCHAR(50) NOT NULL, " +
@@ -27,10 +27,10 @@ public class AuthorDao {
                 "jdbc:postgresql://localhost:5432/db_name",
                 "username",
                 "password"
-        )){
-            try (Statement statement = connection.createStatement()){
+        )) {
+            try (Statement statement = connection.createStatement()) {
                 // executeUpdate: создание, обновление, удаление
-                               // таблиц или записей
+                // таблиц или записей
                 // для не SELECT запросов
                 statement.executeUpdate(createSql);
                 return true;
@@ -40,12 +40,12 @@ public class AuthorDao {
         }
     }
 
-    public int insert(Author author){
+    public int insert(Author author) {
         String insertSql = "INSERT INTO tb_authors (unique_name, is_active) " +
                 "VALUES (?, ?)";
 
-        try (Connection connection = C3P0Pool.getConnection()){
-            try (PreparedStatement ps = connection.prepareStatement(insertSql)){
+        try (Connection connection = C3P0Pool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(insertSql)) {
                 ps.setString(1, author.getUniqueName());
                 ps.setBoolean(2, author.isActive());
                 return ps.executeUpdate();
@@ -55,12 +55,12 @@ public class AuthorDao {
         }
     }
 
-    public int[] insert(List<Author> authors){
+    public int[] insert(List<Author> authors) {
         String insertSql = "INSERT INTO tb_authors (unique_name, is_active) " +
                 "VALUES (?, ?)";
 
-        try (Connection connection = C3P0Pool.getConnection()){
-            try (PreparedStatement ps = connection.prepareStatement(insertSql)){
+        try (Connection connection = C3P0Pool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(insertSql)) {
                 for (Author author : authors) {
                     ps.setString(1, author.getUniqueName());
                     ps.setBoolean(2, author.isActive());
@@ -73,12 +73,12 @@ public class AuthorDao {
         }
     }
 
-    public int update(Author author){
+    public int update(Author author) {
         String updateSql = "UPDATE tb_authors SET is_active = ? " +
                 "WHERE unique_name = ?";
 
-        try (Connection connection = C3P0Pool.getConnection()){
-            try (PreparedStatement ps = connection.prepareStatement(updateSql)){
+        try (Connection connection = C3P0Pool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(updateSql)) {
                 ps.setBoolean(1, author.isActive());
                 ps.setString(2, author.getUniqueName());
                 return ps.executeUpdate();
@@ -88,13 +88,13 @@ public class AuthorDao {
         }
     }
 
-    public Author getByUniqueName(String uniqueName){
+    public Author getByUniqueName(String uniqueName) {
         String selectSql = "SELECT id, unique_name, " +
                 "registered_at AS registered, is_active " +
                 "FROM tb_authors " +
                 "WHERE unique_name = ?";
-        try (Connection connection = C3P0Pool.getConnection()){
-            try (PreparedStatement ps = connection.prepareStatement(selectSql)){
+        try (Connection connection = C3P0Pool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(selectSql)) {
                 ps.setString(1, uniqueName);
                 ResultSet resultSet = ps.executeQuery();
                 if (resultSet.next()) {
@@ -113,12 +113,12 @@ public class AuthorDao {
         return null;
     }
 
-    public List<Author> allAuthors(){
+    public List<Author> allAuthors() {
         String selectSql = "SELECT id, unique_name, registered_at, is_active " +
                 "FROM tb_authors WHERE is_active = true";
 
-        try (Connection connection = C3P0Pool.getConnection()){
-            try (PreparedStatement ps = connection.prepareStatement(selectSql)){
+        try (Connection connection = C3P0Pool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(selectSql)) {
                 ResultSet resultSet = ps.executeQuery();
                 List<Author> list = new ArrayList<>();
                 while (resultSet.next()) {
