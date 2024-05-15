@@ -43,6 +43,20 @@ public class NotesDao {
                 "FROM tb_authors, tb_notes " +
                 "WHERE tb_authors.id = tb_notes.author_id AND " +
                 "tb_notes.id = ?";
+        String selectSqlInnerJoin = "SELECT " +
+                "tb_authors.id AS id_author, tb_authors.unique_name, tb_authors.registered_at, tb_authors.is_active, " +
+                "tb_notes.id AS id_note, tb_notes.title, tb_notes.text, tb_notes.created_at " +
+                "FROM tb_authors " +
+                "JOIN tb_notes " +
+                "ON tb_authors.id = tb_notes.author_id " +
+                "WHERE tb_notes.id = ?";
+        // FROM tb_authors
+        // JOIN tb_notes
+        // ON tb_authors.id = tb_notes.author_id
+        // JOIN tb_comments
+        // ON tb_notes.id = tb_comments.note_id
+        // WHERE tb_notes.id = ?
+
 
         try (Connection connection = C3P0Pool.getConnection()) {
             try (PreparedStatement ps = connection.prepareStatement(selectSql)) {
@@ -68,6 +82,35 @@ public class NotesDao {
         }
         return null;
     }
+
+                                    // tb_authors.unique_name
+    // получить названия заметок имя автора которых равно authorName
+    public List<Note> getNotesByAuthorName(String authorName){
+        String select = "SELECT tb_notes.title " +
+                "FROM tb_notes " +
+                "JOIN tb_authors " +
+                "ON tb_authors.id = tb_notes.author_id " +
+                "WHERE tb_authors.unique_name = ?"; // + authorName
+        /*String select = "SELECT tb_notes.title " +
+                "FROM tb_notes " +
+                "JOIN tb_authors " +
+                "ON tb_authors.id = tb_notes.author_id " +
+                "WHERE tb_authors.unique_name IN (?,?,?)";
+        String select = "SELECT tb_notes.title " +
+                "FROM tb_notes " +
+                "JOIN tb_authors " +
+                "ON tb_authors.id = tb_notes.author_id " +
+                "WHERE tb_authors.unique_name ILIKE ?)";*/
+
+        // Tom John MiKE
+        // ILIKE
+        // name ILIKE %o%
+        // name ILIKE o%
+        // name ILIKE %o
+        // name ILIKE o
+        // authorName mike
+        return null;
+    }
 }
 // 1. CHECK на created_at - дата в прошлом
 // 2. INSERT tb_notes
@@ -76,3 +119,4 @@ public class NotesDao {
 // 5. SELECT tb_notes c LIMIT и OFFSET
 
 
+//

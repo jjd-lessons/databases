@@ -136,4 +136,13 @@ public class AuthorDao {
         }
 
     }
+
+    public List<Author> authorsWithoutNotes(){
+        String selectSqlLeftJoin = "SELECT id, unique_name, registered_at " +
+                "FROM tb_authors " +
+                "LEFT JOIN tb_notes " +
+                "ON tb_authors.id = tb_notes.author_id " +
+                "WHERE tb_notes.author_id IS NULL";
+        return null;
+    }
 }
