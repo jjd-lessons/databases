@@ -1,4 +1,4 @@
-package ru.itmo.databases.jpa;
+package ru.itmo.databases.jpa.examples;
 
 import jakarta.persistence.*;
 

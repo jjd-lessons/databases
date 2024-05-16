@@ -11,6 +11,7 @@ import lombok.Data;
 @Entity
 @Table(name = "tb_prizes")
 public class Prize {
+    // @NaturalId
 
     @Id
     // AUTO - JPA провайдер решает, как генерировать уникальные ID для сущности
@@ -35,7 +36,5 @@ public class Prize {
     @Column(name = "competition_id")
     private int competitionId;
 
-    public enum PlaceNumber{
-        FIRST, SECOND, THIRD;
-    }
+
 }
