@@ -1,4 +1,4 @@
-package ru.itmo.databases.jpa;
+package ru.itmo.databases.jpa.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

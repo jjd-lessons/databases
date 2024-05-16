@@ -1,4 +1,4 @@
-package ru.itmo.databases.jpa;
+package ru.itmo.databases.jpa.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -6,13 +6,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
 import org.hibernate.type.SqlTypes;
-import org.hibernate.usertype.UserType;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedNativeQueries({
+        @NamedNativeQuery(name = "get_by_name", query = "SELECT * FROM tb_competition where title ILIKE ?")
+})
 @Data
 @Entity
 @Table(name = "tb_competition")
@@ -60,6 +61,7 @@ public class Competition {
         this.title = title;
         this.label = label;
     }
+
 }
 
 // многие ко многим

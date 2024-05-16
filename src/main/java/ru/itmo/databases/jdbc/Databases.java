@@ -1,8 +1,8 @@
-package ru.itmo.databases;
+package ru.itmo.databases.jdbc;
 
-import ru.itmo.databases.dao.AuthorDao;
-import ru.itmo.databases.dao.NotesDao;
-import ru.itmo.databases.model.Author;
+import ru.itmo.databases.jdbc.dao.AuthorDao;
+import ru.itmo.databases.jdbc.dao.NotesDao;
+import ru.itmo.databases.jdbc.model.Author;
 
 public class Databases {
     public static void main(String[] args) {
